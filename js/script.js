@@ -1,33 +1,13 @@
-var clients = [
-    {
-        id: 1,
-        fullName: "Angelo Ferraz",
-        adress: "Rua Sorocaba, 33",
-        cep: 12232312,
-        district: "São José",
-        city: "São Paulo",
-        state: "SP"
-    },
-    {
-        id: 2,
-        fullName: "Carlos Silva",
-        adress: "Rua São Paulo, 123",
-        cep: 12345678,
-        district: "Barra Funda",
-        city: "São Paulo",
-        state: "SP"
-    },
-    {
-        id: 3,
-        fullName: "Pedro Silva",
-        adress: "Rua Rio de Janeiro, 456",
-        cep: 98765432,
-        district: "Barra da Tijuca",
-        city: "Rio de Janeiro",
-        state: "RJ"
-    }
-]
+function searchCEP() {
+    var cep = document.getElementById("cep").value;
+    var url = `https://viacep.com.br/ws/${cep}/json/`;
 
+    $.getJSON(url, (adress) => {
+        console.log(adress);
+    })
+}
+
+/*
 function loadClients() {
     for (cli of clients) {
         addNewRow(cli);
@@ -60,4 +40,6 @@ function addNewRow(cli) {
 
     var stateNode = document.createTextNode(cli.state);
     newRow.insertCell().appendChild(stateNode);
+    
 }
+    */
