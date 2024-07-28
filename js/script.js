@@ -3,11 +3,33 @@ function searchCEP() {
     var url = `https://viacep.com.br/ws/${cep}/json/`;
 
     $.getJSON(url, (location) => {
-        document.getElementById("inputAddress").value = location.logradouro || "";
-        document.getElementById("inputDistrict").value = location.bairro || "";
-        document.getElementById("inputCity").value = location.localidade || "";
-        document.getElementById("inputState").value = location.uf || "";
+        if (("erro" in location)) {
+            errorMsg("~~CEP NOT FOUND~~");
+        } else {
+            fillLocation(location);
+            document.getElementById("error").innerHTML = "";
+        }
+    }).fail(() => {
+        errorMsg("~~INVALID CEP~~");
     })
+}
+
+function fillLocation(location) {
+    disableNumber(false);
+    document.getElementById("inputAddress").value = location.logradouro || "";
+    document.getElementById("inputDistrict").value = location.bairro || "";
+    document.getElementById("inputCity").value = location.localidade || "";
+    document.getElementById("inputState").value = location.uf || "";
+}
+
+function disableNumber(option) {
+    $("#inputNumber").prop("disabled", option);
+}
+
+function errorMsg(message) {
+    fillLocation({});
+    disableNumber(true);
+    document.getElementById("error").innerHTML = message;
 }
 
 /*

@@ -28,8 +28,8 @@
                         </div>
                         <div class="col-6 col-lg-4 mb-2">
                             <label for="inputCep" class="form-label">Pesquise pelo CEP:</label>
-                            <input onblur="searchCEP()" type="text" class="col-lg-4 form-control" id="inputCep"
-                                minlength="9" />
+                            <input onblur="searchCEP()" type="text" class="col-lg-4 form-control" id="inputCep" />
+                            <span class="text-danger" id="error"></span>
                         </div>
                         <div class="col-8 col-lg-9 mb-2">
                             <label for="inputAddress" class="form-label">Endereço:</label>
@@ -80,6 +80,10 @@
 
     <script src="js/script.js"></script>
     <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/jquery.mask.min.js"></script>
+    <script>
+        $("#inputCep").mask("99999-999");
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
         </script>
