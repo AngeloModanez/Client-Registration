@@ -14,66 +14,68 @@
         <h1 class="display-6 offset-1">Cadastro de Clientes</h1>
     </header>
     <main>
-        <div class="container-sm mx-auto my-4 p-4 rounded-4 bg-dark text-light shadow">
+        <div class="container-sm mx-auto my-5 p-4 rounded-3 bg-dark text-light shadow">
             <section>
-                <form class="mb-5" id="clientForm">
+                <form onsubmit="registerClient(); return false" id="formClient">
                     <div class="row">
                         <div class="col-12 col-lg-6 mb-2">
                             <label for="inputName" class="form-label">Nome:</label>
-                            <input type="text" class="form-control" id="inputName" />
+                            <input type="text" class="form-control" id="inputName" required />
                         </div>
                         <div class="col-12 col-lg-6 mb-2">
                             <label for="inputSurname" class="form-label">Sobrenome:</label>
-                            <input type="text" class="form-control" id="inputSurname" />
+                            <input type="text" class="form-control" id="inputSurname" required />
                         </div>
                         <div class="col-6 col-lg-4 mb-2">
                             <label for="inputCep" class="form-label">Pesquise pelo CEP:</label>
-                            <input onblur="searchCEP()" type="text" class="col-lg-4 form-control" id="inputCep" />
+                            <input onblur="searchCEP()" type="text" class="col-lg-4 form-control" id="inputCep"
+                                required />
                             <span class="text-danger" id="error"></span>
                         </div>
                         <div class="col-8 col-lg-9 mb-2">
                             <label for="inputAddress" class="form-label">Endereço:</label>
-                            <input type="text" class="form-control" id="inputAddress" readonly disabled />
+                            <input type="text" class="form-control" id="inputAddress" readonly disabled required />
                         </div>
                         <div class="col-4 col-lg-3 mb-2">
                             <label for="inputNumber" class="form-label">Número:</label>
-                            <input type="number" class="form-control" id="inputNumber" disabled />
+                            <input type="number" class="form-control" id="inputNumber" disabled required />
                         </div>
-                        <div class="col-12 col-lg-6 mb-2">
+                        <div class="col-12 col-lg-12 mb-2">
                             <label for="inputDistrict" class="form-label">Bairro:</label>
                             <input type="text" class="form-control" id="inputDistrict" readonly disabled />
                         </div>
-                        <div class="col-12 col-lg-6 mb-2">
+                        <div class="col-8 col-lg-6 mb-2">
                             <label for="inputCity" class="form-label">Cidade:</label>
                             <input type="text" class="form-control" id="inputCity" readonly disabled />
                         </div>
-                        <div class="col-6 col-lg-4 mb-3">
+                        <div class="col-4 col-lg-6">
                             <label for="inputState" class="form-label">Estado:</label>
                             <input type="text" class="col-lg-4 form-control" id="inputState" readonly disabled />
                         </div>
                     </div>
+                    <div class="text-center my-5">
+                        <button class="btn btn-outline-light col-10" type="submit">
+                            Salvar
+                        </button>
+                    </div>
                 </form>
             </section>
             <section>
-                <div class="row">
-                    <div class="col-12">
-                        <table class="table table-light table-striped table-hover table-bordered table-responsive mb-5"
-                            id="clientTable">
-                            <thead class="text-center">
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Nome Completo</th>
-                                    <th scope="col">Endereço</th>
-                                    <th scope="col">CEP</th>
-                                    <th scope="col">Bairro</th>
-                                    <th scope="col">Cidade</th>
-                                    <th scope="col">Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                </div>
+                <table class="table table-light table-striped table-hover table-bordered table-responsive"
+                    id="tableClient">
+                    <thead class="text-center">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome Completo</th>
+                            <th scope="col">Endereço</th>
+                            <th scope="col">CEP</th>
+                            <th scope="col">Bairro</th>
+                            <th scope="col">Cidade</th>
+                            <th scope="col">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider"></tbody>
+                </table>
             </section>
         </div>
     </main>

@@ -1,18 +1,5 @@
-function searchCEP() {
-    var cep = document.getElementById("inputCep").value;
-    var url = `https://viacep.com.br/ws/${cep}/json/`;
-
-    $.getJSON(url, (location) => {
-        if (("erro" in location)) {
-            errorMsg("~~CEP NOT FOUND~~");
-        } else {
-            fillLocation(location);
-            document.getElementById("error").innerHTML = "";
-        }
-    }).fail(() => {
-        errorMsg("~~INVALID CEP~~");
-    })
-}
+var clients = [];
+var valid = false;
 
 function fillLocation(location) {
     disableNumber(false);
@@ -27,12 +14,29 @@ function disableNumber(option) {
 }
 
 function errorMsg(message) {
+    valid = false;
     fillLocation({});
     disableNumber(true);
     document.getElementById("error").innerHTML = message;
 }
 
-/*
+function searchCEP() {
+    var cep = document.getElementById("inputCep").value;
+    var url = `https://viacep.com.br/ws/${cep}/json/`;
+
+    $.getJSON(url, (location) => {
+        if (!("erro" in location)) {
+            valid = true;
+            fillLocation(location);
+            document.getElementById("error").innerHTML = "";
+        } else {
+            errorMsg("~~CEP NOT FOUND~~");
+        }
+    }).fail(() => {
+        errorMsg("~~INVALID CEP~~");
+    })
+}
+
 function loadClients() {
     for (cli of clients) {
         addNewRow(cli);
@@ -42,7 +46,7 @@ function loadClients() {
 loadClients();
 
 function addNewRow(cli) {
-    var table = document.getElementById("clientTable");
+    var table = document.getElementById("tableClient");
     var newRow = table.insertRow();
 
     var idNode = document.createTextNode(cli.id);
@@ -65,6 +69,24 @@ function addNewRow(cli) {
 
     var stateNode = document.createTextNode(cli.state);
     newRow.insertCell().appendChild(stateNode);
-    
 }
-    */
+
+function registerClient() {
+    if (valid) {
+        var client = {
+            id: clients.length + 1,
+            fullName: `${document.getElementById("inputName").value} ${document.getElementById("inputSurname").value}`,
+            address: `${document.getElementById("inputAddress").value}, ${document.getElementById("inputNumber").value}`,
+            cep: document.getElementById("inputCep").value,
+            district: document.getElementById("inputDistrict").value,
+            city: document.getElementById("inputCity").value,
+            state: document.getElementById("inputState").value,
+        }
+
+        valid = false;
+        clients.push(client);
+        addNewRow(client);
+        disableNumber(true);
+        document.getElementById("formClient").reset();
+    }
+}
