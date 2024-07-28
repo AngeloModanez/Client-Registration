@@ -1,9 +1,12 @@
 function searchCEP() {
-    var cep = document.getElementById("cep").value;
+    var cep = document.getElementById("inputCep").value;
     var url = `https://viacep.com.br/ws/${cep}/json/`;
 
-    $.getJSON(url, (adress) => {
-        console.log(adress);
+    $.getJSON(url, (location) => {
+        document.getElementById("inputAddress").value = location.logradouro || "";
+        document.getElementById("inputDistrict").value = location.bairro || "";
+        document.getElementById("inputCity").value = location.localidade || "";
+        document.getElementById("inputState").value = location.uf || "";
     })
 }
 
@@ -26,8 +29,8 @@ function addNewRow(cli) {
     var fullNameNode = document.createTextNode(cli.fullName);
     newRow.insertCell().appendChild(fullNameNode);
 
-    var adressNode = document.createTextNode(cli.adress);
-    newRow.insertCell().appendChild(adressNode);
+    var addressNode = document.createTextNode(cli.address);
+    newRow.insertCell().appendChild(addressNode);
 
     var cepNode = document.createTextNode(cli.cep);
     newRow.insertCell().appendChild(cepNode);
